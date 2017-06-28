@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+		<title>paper-toggle-button test</title>
+
+		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+		<script src="../../web-component-tester/browser.js"></script>
+
+		<link rel="import" href="../paper-toggle-button.html">
+	</head>
+	<body>
+
+		<test-fixture id="BasicTestFixture">
+			<template>
+				<paper-toggle-button></paper-toggle-button>
+			</template>
+		</test-fixture>
+
+		<test-fixture id="ChangedPropertyTestFixture">
+			<template>
+				<paper-toggle-button active></paper-toggle-button>
+			</template>
+		</test-fixture>
+
+		<script>
+			suite('paper-toggle-button', function() {
+
+				test('instantiating the element with default properties works', function() {
+					var element = fixture('BasicTestFixture');
+					assert.equal(element.active, false);
+					var elementShadowRoot = element.shadowRoot;
+					var elementInput = elementShadowRoot.querySelector('input');
+					assert.equal(elementInput.checked, false);
+				});
+
+				test('setting a property on the element works', function() {
+					// Create a test fixture
+					var element = fixture('ChangedPropertyTestFixture');
+					assert.equal(element.active, true);
+					var elementShadowRoot = element.shadowRoot;
+					var elementInput = elementShadowRoot.querySelector('input');
+					assert.equal(elementInput.checked, true);
+				});
+
+			});
+		</script>
+
+	</body>
+</html>

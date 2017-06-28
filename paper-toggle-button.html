@@ -1,0 +1,88 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../polymer/lib/mixins/gesture-event-listeners.html">
+<link rel="import" href="../paper-styles/default-theme.html">
+
+<dom-module id="paper-toggle-button">
+	<template>
+		<style>
+			:host {
+				width: 3.5em;
+				height: 2em;
+				display: inline-block;
+				position: relative;
+				-webkit-tap-highlight-color: transparent;
+			}
+
+			input {
+				font: inherit;
+				border: none;
+				background: transparent;
+				-webkit-appearance: none;
+				-moz-appearance: none;
+				appearance: none;
+			}
+
+			input::before,
+			input::after {
+				position: absolute;
+				display: block;
+				content: '';
+				height: 2em;
+				border-radius: 2em;
+			}
+
+			input::before {
+				width: 3.5em;
+				background: var(--divider-color);
+				transition: color .2s, box-shadow .2s;
+				box-shadow: 0 0 .5em .2em var(--divider-color) inset;
+			}
+
+			input::after {
+				width: 2em;
+				border-radius: 2em;
+				transition: transform .4s;
+				transform: translate(0, 0);
+				background: var(--dark-theme-text-color);
+				box-shadow: 0 0 .2em 0 var(--divider-color);
+			}
+
+			input:checked::before {
+				background: var(--dark-primary-color);
+				box-shadow: 0 0 .2em .1em var(--primary-color) inset;
+			}
+
+			input:checked::after {
+				transform: translate(1.6em, 0);
+			}
+		</style>
+		<input type="checkbox" checked="{{active::change}}">
+	</template>
+
+	<script>
+		/**
+		 * `paper-toggle-button`
+		 * A Material Design toggle button
+		 *
+		 * @customElement
+		 * @polymer
+		 * @demo demo/index.html
+		**/
+		class PaperToggleButton extends Polymer.Element {
+			static get is() { return 'paper-toggle-button'; }
+			static get properties() {
+				return {
+					active: {
+						type: Boolean,
+						notify: true,
+						reflectToAttribute: true,
+						value: () => { return false; }
+					}
+				};
+			}
+		}
+
+		window.customElements.define(PaperToggleButton.is, PaperToggleButton);
+	</script>
+</dom-module>
+
